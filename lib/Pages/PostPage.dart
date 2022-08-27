@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:block_talk/views/widgets/Post.dart';
+import 'package:block_talk/Pages/widgets/Post.dart';
 
 
 class PostPage extends StatefulWidget {

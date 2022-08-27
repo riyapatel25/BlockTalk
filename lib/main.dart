@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:block_talk/views/home.dart';
-void main() {
+import 'package:block_talk/Pages/LogIn.dart';
+// import 'package:firebase_core/firebase_core.dart';2
+void main()  {
+  // WidgetsFlutterBinding.ensureInitialized();
+  // await Firebase.initializeApp();
   runApp(MyApp());
 }
 class MyApp extends StatelessWidget {
@@ -17,7 +20,7 @@ class MyApp extends StatelessWidget {
           bodyText2: TextStyle(color: Color.fromARGB(255, 216, 216, 216)), //text inside box
         ),
       ),
-      home: PostPage(),
+      home: LogIn(),
     );
   }
 }
