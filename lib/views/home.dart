@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:block_talk/views/widgets/recipe_card.dart';
+import 'package:block_talk/views/widgets/Post.dart';
 
 
-class HomePage extends StatefulWidget {
+class PostPage extends StatefulWidget {
   @override
-  _HomePageState createState() => _HomePageState();
+  _PostPageState createState() => _PostPageState();
 }
 
-class _HomePageState extends State<HomePage> {
+class _PostPageState extends State<PostPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -83,7 +83,7 @@ class _HomePageState extends State<HomePage> {
           ),
         ),
         
-        body: const RecipeCard(
+        body: const Post(
           title: 'My Post',
           rating: '4.9',
           cookTime: '30 min',

@@ -17,7 +17,7 @@ class MyApp extends StatelessWidget {
           bodyText2: TextStyle(color: Color.fromARGB(255, 216, 216, 216)), //text inside box
         ),
       ),
-      home: HomePage(),
+      home: PostPage(),
     );
   }
 }

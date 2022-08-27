@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 
-class RecipeCard extends StatelessWidget {
+class Post extends StatelessWidget {
   final String title;
   final String rating;
   final String cookTime;
   final String thumbnailUrl;
-  const RecipeCard({
+  const Post({
     required this.title,
     required this.cookTime,
     required this.rating,
