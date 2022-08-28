@@ -1,7 +1,8 @@
 
-import 'package:block_talk/pages/signup_page.dart';
+//import 'package:block_talk/pages/SignUp.dart';
 import 'package:flutter/material.dart';
-import 'pages/welcome_page.dart';
+import 'pages/Welcome.dart';
+import 'pages/SignUp.dart';
 const Taupe =  Color(0xFF7D5C65);
 
 void main(){
