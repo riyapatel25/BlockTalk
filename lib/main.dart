@@ -5,6 +5,7 @@ import 'package:block_talk/Pages/LogIn.dart';
 // import 'package:firebase_core/firebase_core.dart';
 import 'pages/Welcome.dart';
 import 'pages/SignUp.dart';
+
 const Taupe =  Color(0xFF7D5C65);
 
 
