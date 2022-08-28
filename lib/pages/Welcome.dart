@@ -1,5 +1,7 @@
-import 'package:flutter/material.dart';
 
+import 'package:flutter/material.dart';
+import 'SignUp.dart';
+import 'LogIn.dart';
 
 class WelcomePage extends StatelessWidget{
   Widget build (BuildContext context){
@@ -24,7 +26,9 @@ class WelcomePage extends StatelessWidget{
               child: TextButton(
                 style: ButtonStyle(backgroundColor: MaterialStateProperty.all<Color>(Theme.of(context).colorScheme.secondary),
                                   foregroundColor:  MaterialStateProperty.all<Color>(Theme.of(context).colorScheme.primary)),
-                onPressed: (){},
+                onPressed: (){
+                  Navigator.push(context, MaterialPageRoute(builder: (context) =>  SignUp()));
+                },
                 child: Text('Sign Up'),
               )
             ),
@@ -35,7 +39,9 @@ class WelcomePage extends StatelessWidget{
               child: TextButton(
                 style: ButtonStyle(backgroundColor: MaterialStateProperty.all<Color>(Theme.of(context).colorScheme.onPrimary),
                                   foregroundColor:  MaterialStateProperty.all<Color>(Theme.of(context).colorScheme.primary)),
-                 onPressed: (){},
+                 onPressed: (){
+                  Navigator.push(context, MaterialPageRoute(builder: (context) =>  LogIn()));
+                 },
                 child: Text('Log In'),
               )
             ), 
