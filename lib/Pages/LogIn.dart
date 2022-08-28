@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'SignUp.dart';
 // import 'package:firebase_auth/firebase_auth.dart';
 
 class LogIn extends StatefulWidget {
@@ -141,7 +142,10 @@ class _LogInState extends State<LogIn> {
             //       },
             //     ),
             // ),
-            onPressed: () { },
+            onPressed: () { 
+                  Navigator.push(context, MaterialPageRoute(builder: (context) =>  SignUp()));
+              
+            },
             child: const Text(
             'Register now',
               style: TextStyle(
