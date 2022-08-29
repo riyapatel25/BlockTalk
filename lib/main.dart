@@ -1,5 +1,7 @@
+import 'package:block_talk/Pages/PostPage.dart';
 import 'package:flutter/material.dart';
 import 'package:block_talk/Pages/LogIn.dart';
+
 // import 'package:firebase_core/firebase_core.dart';
 
 import 'Pages/Welcome.dart';
@@ -25,7 +27,7 @@ class BlockTalk extends StatelessWidget{
       title: 'BlockTalk',
       theme: ThemeData(colorScheme: colours),
       debugShowCheckedModeBanner: false,
-      home: WelcomePage(),
+      home: PostPage(),
     );
   }
 }
