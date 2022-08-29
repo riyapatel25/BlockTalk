@@ -47,6 +47,7 @@ class _SignUpState extends State<SignUp> {
                 padding: EdgeInsets.symmetric(horizontal: 25.0),
                 child: TextField(
                   // controller: _emailController,
+                  style: TextStyle( color: Color(0xFFE9D6C4)),
                   decoration: InputDecoration(
                     enabledBorder: OutlineInputBorder(
                       borderSide: BorderSide(color: Color(0xFF808767)),
@@ -74,6 +75,7 @@ class _SignUpState extends State<SignUp> {
                 padding: EdgeInsets.symmetric(horizontal: 25.0),
                 child: TextField(
                   // controller: _emailController,
+                  style: TextStyle( color: Color(0xFFE9D6C4)),
                   decoration: InputDecoration(
                     enabledBorder: OutlineInputBorder(
                       borderSide: BorderSide(color: Color(0xFF808767)),
@@ -100,6 +102,7 @@ class _SignUpState extends State<SignUp> {
                 padding: EdgeInsets.symmetric(horizontal: 25.0),
                 child: TextField(
                   // controller: _passwordController,
+                  style: TextStyle( color: Color(0xFFE9D6C4)),
                   decoration: InputDecoration(
                     enabledBorder: OutlineInputBorder(
                       borderSide: BorderSide(color: Color(0xFF808767)),
@@ -125,6 +128,7 @@ class _SignUpState extends State<SignUp> {
                 padding: EdgeInsets.symmetric(horizontal: 25.0),
                 child: TextField(
                   // controller: _passwordController,
+                  style: TextStyle( color: Color(0xFFE9D6C4)),
                   decoration: InputDecoration(
                     enabledBorder: OutlineInputBorder(
                       borderSide: BorderSide(color: Color(0xFF808767)),

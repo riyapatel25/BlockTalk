@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:block_talk/Pages/widgets/Post.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 class PostPage extends StatefulWidget {
   @override
@@ -7,9 +8,11 @@ class PostPage extends StatefulWidget {
 }
 
 class _PostPageState extends State<PostPage> {
+  final user = FirebaseAuth.instance.currentUser;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+   
         appBar: AppBar(
           backgroundColor: Color(0xFF7D5C65),
           shadowColor: Color(0xFF808767),
@@ -88,12 +91,28 @@ class _PostPageState extends State<PostPage> {
             ],
           ),
         ),
-        body: const Post(
+        body: Center(
+          child: Column(
+            children: [
+              Text('signed in as' + user!.email!),
+               const Post(
           title: 'My Post',
           rating: '4.9',
           cookTime: '30 min',
           thumbnailUrl:
               'https://lh3.googleusercontent.com/ei5eF1LRFkkcekhjdR_8XgOqgdjpomf-rda_vvh7jIauCgLlEWORINSKMRR6I6iTcxxZL9riJwFqKMvK0ixS0xwnRHGMY4I5Zw=s360',
-        ));
+        ),
+        MaterialButton(
+          onPressed: () {
+            FirebaseAuth.instance.signOut();
+          },
+          color: Colors.deepPurple,
+          child: Text('sign out'),
+        )
+            ],
+            ),
+          ),
+
+        );
   }
 }

@@ -1,0 +1,46 @@
+{
+  "project_info": {
+    "project_number": "120224478273",
+    "project_id": "blocktalk-571b3",
+    "storage_bucket": "blocktalk-571b3.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:120224478273:android:c796bb8d30a0a1462482c0",
+        "android_client_info": {
+          "package_name": "com.example.block_talk"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "120224478273-g0iofh7v91galn3k69qrcr13s0f7uaid.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC8JzNUtjjHs1zxEnCuJgB1n8cz4mN6XFQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "120224478273-g0iofh7v91galn3k69qrcr13s0f7uaid.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "120224478273-idrpcl2fabshhu6ra7ta0u1itvjofohu.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.blockTalk"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
