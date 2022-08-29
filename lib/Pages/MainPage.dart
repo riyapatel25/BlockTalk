@@ -2,6 +2,7 @@ import 'package:block_talk/Pages/WelcomePage.dart';
 import 'package:flutter/material.dart';
 import 'LogIn.dart';
 import 'PostPage.dart';
+import 'AuthPage.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:block_talk/Pages/widgets/Post.dart';
@@ -20,7 +21,7 @@ class MainPage extends StatelessWidget {
               return PostPage();
             }
             else{
-              return LogIn();
+              return AuthPage();
             }
           },
         ),

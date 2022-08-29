@@ -3,6 +3,8 @@ import 'SignUp.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
 class LogIn extends StatefulWidget {
+  final VoidCallback showSignUp;
+  const LogIn({Key? key, required this.showSignUp}) : super(key:key);
   @override
   _LogInState createState() => _LogInState();
 }
@@ -145,19 +147,9 @@ class _LogInState extends State<LogIn> {
               SizedBox(width: 2),
               //sign up page redirect
 
-              TextButton(
-                // style: ButtonStyle(
-                //     backgroundColor: MaterialStateProperty.resolveWith<Color>(
-                //       (Set<MaterialState> states) {
-                //         if (states.contains(MaterialState.pressed)) return Theme.of(context).colorScheme.primary.withOpacity(0.5);
-                //         return Color.fromARGB(255, 16, 10, 12); // Use the component's default.
-                //       },
-                //     ),
-                // ),
-                onPressed: () {
-                  Navigator.push(context,
-                      MaterialPageRoute(builder: (context) => SignUp()));
-                },
+              GestureDetector(
+              
+                onTap: widget.showSignUp,
                 child: const Text(
                   'Register now',
                   style: TextStyle(

@@ -1,26 +1,40 @@
 import 'package:flutter/material.dart';
 // import 'SignUp.dart';
 import 'LogIn.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+
 
 // import 'package:firebase_auth/firebase_auth.dart';
 
 class SignUp extends StatefulWidget {
+   final VoidCallback showLogIn;
+  const SignUp({Key? key, required this.showLogIn}) : super(key:key);
+
   @override
   _SignUpState createState() => _SignUpState();
 }
 
 class _SignUpState extends State<SignUp> {
 //text controllers
-  // final _emailController = TextEditingController();
-  // final _passwordController = TextEditingController();
+  final _emailController = TextEditingController();
+  final _passwordController = TextEditingController();
 
-//method for log in
-  // Future logIn() async {
-  //   await FirebaseAuth.instance.signInWithEmailAndPassword(
-  //     email: _emailController.text.trim(),
-  //     password: _passwordController.text.trim(),
-  //   );
-  // }
+// method for sign up button
+  Future signUp() async {
+    await FirebaseAuth.instance.createUserWithEmailAndPassword(
+      email: _emailController.text.trim(),
+      password: _passwordController.text.trim(),
+    );
+  }
+   //help memory management
+  @override
+  void dispose(){
+    _emailController.dispose();
+    _passwordController.dispose();
+
+    super.dispose();
+
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -156,19 +170,22 @@ class _SignUpState extends State<SignUp> {
                 padding: EdgeInsets.symmetric(horizontal: 25.0),
                 // child: GestureDetector(
                 // onTap:logIn, //method when log in button is clocked
-                child: Container(
-                  padding: EdgeInsets.all(20),
-                  decoration: BoxDecoration(
-                    color: Color(0xFF808767),
-                    borderRadius: BorderRadius.circular(24),
-                  ),
-                  child: const Center(
-                    child: Text(
-                      'Sign Up',
-                      style: TextStyle(
-                        color: Color(0xFFE9D6C4),
-                        fontWeight: FontWeight.bold,
-                        fontSize: 18,
+                child: GestureDetector(
+                    onTap: signUp,
+                  child: Container(
+                    padding: EdgeInsets.all(20),
+                    decoration: BoxDecoration(
+                      color: Color(0xFF808767),
+                      borderRadius: BorderRadius.circular(24),
+                    ),
+                    child: const Center(
+                      child: Text(
+                        'Sign Up',
+                        style: TextStyle(
+                          color: Color(0xFFE9D6C4),
+                          fontWeight: FontWeight.bold,
+                          fontSize: 18,
+                        ),
                       ),
                     ),
                   ),
@@ -189,19 +206,8 @@ class _SignUpState extends State<SignUp> {
                 SizedBox(width: 2),
                 //sign up page redirect
 
-                TextButton(
-                  // style: ButtonStyle(
-                  //     backgroundColor: MaterialStateProperty.resolveWith<Color>(
-                  //       (Set<MaterialState> states) {
-                  //         if (states.contains(MaterialState.pressed)) return Theme.of(context).colorScheme.primary.withOpacity(0.5);
-                  //         return Color.fromARGB(255, 16, 10, 12); // Use the component's default.
-                  //       },
-                  //     ),
-                  // ),
-                  onPressed: () {
-                    Navigator.push(context,
-                        MaterialPageRoute(builder: (context) => LogIn()));
-                  },
+                GestureDetector(
+                  onTap: widget.showLogIn,
                   child: const Text(
                     'Log in now',
                     style: TextStyle(
