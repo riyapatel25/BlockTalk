@@ -1,3 +1,4 @@
+import 'package:block_talk/NavBar.dart';
 import 'package:block_talk/Pages/PostPage.dart';
 import 'package:flutter/material.dart';
 import 'package:block_talk/Pages/LogIn.dart';
@@ -27,7 +28,7 @@ class BlockTalk extends StatelessWidget{
       title: 'BlockTalk',
       theme: ThemeData(colorScheme: colours),
       debugShowCheckedModeBanner: false,
-      home: PostPage(),
+      home: NavBar(),
     );
   }
 }

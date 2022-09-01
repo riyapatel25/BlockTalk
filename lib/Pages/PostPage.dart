@@ -19,7 +19,7 @@ class _PostPageState extends State<PostPage> with TickerProviderStateMixin {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          backgroundColor: Theme.of(context).colorScheme.primary,
+          backgroundColor: Theme.of(context).colorScheme.tertiary,
           shadowColor: Theme.of(context).colorScheme.tertiary,
           title: TabBar(    
           controller: _tabController,
