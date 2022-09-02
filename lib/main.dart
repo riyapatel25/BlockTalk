@@ -5,6 +5,7 @@ import 'Pages/WelcomePage.dart';
 import 'Pages/SignUp.dart';
 import 'Pages/MainPage.dart';
 import 'firebase_options.dart';
+// import 'package:cloud_firestore/cloud_firestore.dart';
 
 
 
@@ -33,7 +34,7 @@ class BlockTalk extends StatelessWidget{
       title: 'BlockTalk',
       theme: ThemeData(colorScheme: colours),
       debugShowCheckedModeBanner: false,
-      home: MainPage(),
+      home: LogIn(),
     );
   }
 }
