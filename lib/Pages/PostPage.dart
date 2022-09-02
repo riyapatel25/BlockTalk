@@ -1,14 +1,36 @@
 import 'package:flutter/material.dart';
 import 'package:block_talk/Pages/widgets/Post.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:block_talk/models/user_model.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'LogIn.dart';
+
 
 class PostPage extends StatefulWidget {
-  @override
+    const PostPage({Key? key}) : super(key: key);
+    @override
   _PostPageState createState() => _PostPageState();
 }
 
 class _PostPageState extends State<PostPage> {
-  final user = FirebaseAuth.instance.currentUser;
+   User? user = FirebaseAuth.instance.currentUser;
+  //curent user
+  UserModel loggedInUser = UserModel();
+
+
+  @override
+  void initState() {
+    super.initState();
+    FirebaseFirestore.instance
+        .collection("users")
+        .doc(user!.uid)
+        .get()
+        .then((value) {
+      this.loggedInUser = UserModel.fromMap(value.data());
+      setState(() {});
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -94,7 +116,11 @@ class _PostPageState extends State<PostPage> {
         body: Center(
           child: Column(
             children: [
-              Text('signed in as' + user!.email!),
+              // Text('signed in as' + user!.email!),
+              Text("Signed in as:"),
+              Text("${loggedInUser.firstName} ${loggedInUser.secondName}"),
+              Text("${loggedInUser.email}"),
+
                const Post(
           title: 'My Post',
           rating: '4.9',
@@ -104,7 +130,7 @@ class _PostPageState extends State<PostPage> {
         ),
         MaterialButton(
           onPressed: () {
-            FirebaseAuth.instance.signOut();
+            logout(context);
           },
           color: Colors.deepPurple,
           child: Text('sign out'),
@@ -115,4 +141,11 @@ class _PostPageState extends State<PostPage> {
 
         );
   }
+  //  logout function
+  Future<void> logout(BuildContext context) async {
+    await FirebaseAuth.instance.signOut();
+    Navigator.of(context).pushReplacement(
+        MaterialPageRoute(builder: (context) => LogIn()));
+  }
+
 }

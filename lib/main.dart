@@ -23,12 +23,6 @@ void main() async {
   );
   runApp(BlockTalk());
 }
-// void main() async {
-//   WidgetsFlutterBinding.ensureInitialized();
-//   await Firebase.initializeApp();
-//   runApp(BlockTalk());
-// }
-
 
 class BlockTalk extends StatelessWidget{
   const BlockTalk({super.key});
@@ -39,7 +33,7 @@ class BlockTalk extends StatelessWidget{
       title: 'BlockTalk',
       theme: ThemeData(colorScheme: colours),
       debugShowCheckedModeBanner: false,
-      home: LogIn(),
+      home: WelcomePage(),
     );
   }
 }
