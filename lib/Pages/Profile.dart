@@ -19,12 +19,12 @@ class _ProfileState extends State<Profile> {
                                       rating: '4.9',
                                       cookTime: '30 min',
                                       thumbnailUrl: 'https://lh3.googleusercontent.com/ei5eF1LRFkkcekhjdR_8XgOqgdjpomf-rda_vvh7jIauCgLlEWORINSKMRR6I6iTcxxZL9riJwFqKMvK0ixS0xwnRHGMY4I5Zw=s360',
-                                      )),
+                                      postHeight:400),),
                                       Container(height: 400, child: Post(title: 'My Post',
                                       rating: '4.9',
                                       cookTime: '30 min',
                                       thumbnailUrl: 'https://lh3.googleusercontent.com/ei5eF1LRFkkcekhjdR_8XgOqgdjpomf-rda_vvh7jIauCgLlEWORINSKMRR6I6iTcxxZL9riJwFqKMvK0ixS0xwnRHGMY4I5Zw=s360',
-                                      )),
+                                      postHeight: 400,)),
                                 ];
   
   @override

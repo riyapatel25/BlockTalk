@@ -5,18 +5,20 @@ class Post extends StatelessWidget {
   final String rating;
   final String cookTime;
   final String thumbnailUrl;
+  final double postHeight;
   const Post({
     required this.title,
     required this.cookTime,
     required this.rating,
     required this.thumbnailUrl,
+    required this.postHeight,
   });
   @override
   Widget build(BuildContext context) {
     return Container(
       margin: const EdgeInsets.symmetric(horizontal: 22, vertical: 10),
       width: MediaQuery.of(context).size.width,
-      height: 180,
+      height: postHeight,
       decoration: BoxDecoration(
         color: Colors.black,
         borderRadius: BorderRadius.circular(15),

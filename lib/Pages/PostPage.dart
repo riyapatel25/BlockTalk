@@ -1,7 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:block_talk/Pages/widgets/Post.dart';
 import 'package:google_fonts/google_fonts.dart';
-List<Post> posts = [];
+
+List<Post> posts =  <Post>[Post(title: 'My Post', rating: '4.9', cookTime: '30 min',thumbnailUrl: 'https://lh3.googleusercontent.com/ei5eF1LRFkkcekhjdR_8XgOqgdjpomf-rda_vvh7jIauCgLlEWORINSKMRR6I6iTcxxZL9riJwFqKMvK0ixS0xwnRHGMY4I5Zw=s360', postHeight: 400,),
+                          Post(title: 'My Post', rating: '4.9', cookTime: '30 min', thumbnailUrl: 'https://lh3.googleusercontent.com/ei5eF1LRFkkcekhjdR_8XgOqgdjpomf-rda_vvh7jIauCgLlEWORINSKMRR6I6iTcxxZL9riJwFqKMvK0ixS0xwnRHGMY4I5Zw=s360', postHeight: 180,),
+                          Post(title: 'My Post', rating: '4.9', cookTime: '30 min', thumbnailUrl: 'https://lh3.googleusercontent.com/ei5eF1LRFkkcekhjdR_8XgOqgdjpomf-rda_vvh7jIauCgLlEWORINSKMRR6I6iTcxxZL9riJwFqKMvK0ixS0xwnRHGMY4I5Zw=s360', postHeight: 240,),
+                          ];
+                          
 class PostPage extends StatefulWidget {
   @override
   _PostPageState createState() => _PostPageState();
@@ -38,18 +43,11 @@ class _PostPageState extends State<PostPage> with TickerProviderStateMixin {
         body: 
         TabBarView(
           controller: _tabController,
-          children:  <Widget>[
-             Post(title: 'My Post',
-                  rating: '4.9',
-                  cookTime: '30 min',
-                  thumbnailUrl: 'https://lh3.googleusercontent.com/ei5eF1LRFkkcekhjdR_8XgOqgdjpomf-rda_vvh7jIauCgLlEWORINSKMRR6I6iTcxxZL9riJwFqKMvK0ixS0xwnRHGMY4I5Zw=s360',
-                  ),
-             Post(title: 'My Post',
-                  rating: '4.9',
-                  cookTime: '30 min',
-                  thumbnailUrl: 'https://lh3.googleusercontent.com/ei5eF1LRFkkcekhjdR_8XgOqgdjpomf-rda_vvh7jIauCgLlEWORINSKMRR6I6iTcxxZL9riJwFqKMvK0ixS0xwnRHGMY4I5Zw=s360',
-                  ),
-          ],     
+          children: [Container(margin: const EdgeInsets.symmetric(vertical: 20.0),
+                                child: ListView( scrollDirection: Axis.vertical, children: posts),), 
+                    Container(margin: const EdgeInsets.symmetric(vertical: 20.0), 
+                                child: ListView( scrollDirection: Axis.vertical, children: posts),)
+                    ],
         ),
     );
   }

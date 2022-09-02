@@ -39,7 +39,7 @@ class _NavBarState extends State<NavBar> {
         BottomNavigationBarItem(icon: Icon(Icons.person), label:'Profile', backgroundColor: Theme.of(context).colorScheme.primary,),
        ],
        currentIndex: _selectedIndex,
-      backgroundColor: Theme.of(context).colorScheme.primary,
+       type: BottomNavigationBarType.shifting,
        selectedItemColor: Theme.of(context).colorScheme.onPrimary,
        onTap: _onItemTapped,),
        
