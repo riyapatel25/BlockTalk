@@ -4,7 +4,7 @@ import 'LogIn.dart';
 import 'PostPage.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-// import 'package:email_password_login/model/user_model.dart';
+import 'package:block_talk/models/user_model.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 
@@ -35,6 +35,7 @@ class _SignUpState extends State<SignUp> {
   Widget build(BuildContext context) {
     //first name field
     final firstNameField = TextFormField(
+      style: TextStyle( color: Color(0xFFE9D6C4)),
         autofocus: false,
         controller: firstNameEditingController,
         keyboardType: TextInputType.name,
@@ -52,13 +53,6 @@ class _SignUpState extends State<SignUp> {
           firstNameEditingController.text = value!;
         },
         textInputAction: TextInputAction.next,
-        // decoration: InputDecoration(
-        //   prefixIcon: Icon(Icons.account_circle),
-        //   contentPadding: EdgeInsets.fromLTRB(20, 15, 20, 15),
-        //   hintText: "First Name",
-        //   border: OutlineInputBorder(
-        //     borderRadius: BorderRadius.circular(10),
-        //   ),
           decoration: InputDecoration(
                   enabledBorder: OutlineInputBorder(
                     borderSide: BorderSide(color: Color(0xFF808767)),
@@ -81,6 +75,7 @@ class _SignUpState extends State<SignUp> {
 
     //second name field
     final secondNameField = TextFormField(
+      style: TextStyle( color: Color(0xFFE9D6C4)),
         autofocus: false,
         controller: secondNameEditingController,
         keyboardType: TextInputType.name,
@@ -94,14 +89,6 @@ class _SignUpState extends State<SignUp> {
           secondNameEditingController.text = value!;
         },
         textInputAction: TextInputAction.next,
-        // decoration: InputDecoration(
-        //   prefixIcon: Icon(Icons.account_circle),
-        //   contentPadding: EdgeInsets.fromLTRB(20, 15, 20, 15),
-        //   hintText: "Second Name",
-        //   border: OutlineInputBorder(
-        //     borderRadius: BorderRadius.circular(10),
-        //   ),
-        // )
           decoration: InputDecoration(
                   enabledBorder: OutlineInputBorder(
                     borderSide: BorderSide(color: Color(0xFF808767)),
@@ -124,6 +111,7 @@ class _SignUpState extends State<SignUp> {
 
     //email field
     final emailField = TextFormField(
+      style: TextStyle( color: Color(0xFFE9D6C4)),
         autofocus: false,
         controller: emailEditingController,
         keyboardType: TextInputType.emailAddress,
@@ -142,14 +130,6 @@ class _SignUpState extends State<SignUp> {
           firstNameEditingController.text = value!;
         },
         textInputAction: TextInputAction.next,
-        // decoration: InputDecoration(
-        //   prefixIcon: Icon(Icons.mail),
-        //   contentPadding: EdgeInsets.fromLTRB(20, 15, 20, 15),
-        //   hintText: "Email",
-        //   border: OutlineInputBorder(
-        //     borderRadius: BorderRadius.circular(10),
-        //   ),
-        // )
           decoration: InputDecoration(
                   enabledBorder: OutlineInputBorder(
                     borderSide: BorderSide(color: Color(0xFF808767)),
@@ -172,6 +152,8 @@ class _SignUpState extends State<SignUp> {
 
     //password field
     final passwordField = TextFormField(
+      style: TextStyle( color: Color(0xFFE9D6C4)),
+
         autofocus: false,
         controller: passwordEditingController,
         obscureText: true,
@@ -211,6 +193,8 @@ class _SignUpState extends State<SignUp> {
 
     //confirm password field
     final confirmPasswordField = TextFormField(
+      style: TextStyle( color: Color(0xFFE9D6C4)),
+
         autofocus: false,
         controller: confirmPasswordEditingController,
         obscureText: true,
@@ -225,14 +209,6 @@ class _SignUpState extends State<SignUp> {
           confirmPasswordEditingController.text = value!;
         },
         textInputAction: TextInputAction.done,
-        // decoration: InputDecoration(
-        //   prefixIcon: Icon(Icons.vpn_key),
-        //   contentPadding: EdgeInsets.fromLTRB(20, 15, 20, 15),
-        //   hintText: "Confirm Password",
-        //   border: OutlineInputBorder(
-        //     borderRadius: BorderRadius.circular(10),
-        //   ),
-        // )
           decoration: InputDecoration(
                   enabledBorder: OutlineInputBorder(
                     borderSide: BorderSide(color: Color(0xFF808767)),
@@ -262,7 +238,7 @@ class _SignUpState extends State<SignUp> {
           padding: EdgeInsets.fromLTRB(20, 15, 20, 15),
           minWidth: MediaQuery.of(context).size.width,
           onPressed: () {
-            // signUp(emailEditingController.text, passwordEditingController.text);
+            signUp(emailEditingController.text, passwordEditingController.text);
           },
           child: Text(
             "SignUp",
@@ -369,6 +345,71 @@ class _SignUpState extends State<SignUp> {
       ),
     );
   
+  }
+
+  void signUp(String email, String password) async {
+    if (_formKey.currentState!.validate()) {
+      try {
+        await _auth
+            .createUserWithEmailAndPassword(email: email, password: password)
+            .then((value) => {postDetailsToFirestore()})
+            .catchError((e) {
+          Fluttertoast.showToast(msg: e!.message);
+        });
+      } on FirebaseAuthException catch (error) {
+        switch (error.code) {
+          case "invalid-email":
+            errorMessage = "Your email address appears to be malformed.";
+            break;
+          case "wrong-password":
+            errorMessage = "Your password is wrong.";
+            break;
+          case "user-not-found":
+            errorMessage = "User with this email doesn't exist.";
+            break;
+          case "user-disabled":
+            errorMessage = "User with this email has been disabled.";
+            break;
+          case "too-many-requests":
+            errorMessage = "Too many requests";
+            break;
+          case "operation-not-allowed":
+            errorMessage = "Signing in with Email and Password is not enabled.";
+            break;
+          default:
+            errorMessage = "An undefined Error happened.";
+        }
+        Fluttertoast.showToast(msg: errorMessage!);
+        print(error.code);
+      }
+    }
+  }
+  postDetailsToFirestore() async {
+    // calling our firestore
+    // calling our user model
+    // sending these values
+
+    FirebaseFirestore firebaseFirestore = FirebaseFirestore.instance;
+    User? user = _auth.currentUser; 
+
+    UserModel userModel = UserModel(); 
+
+    // writing all the values
+    userModel.email = user!.email;
+    userModel.uid = user.uid;
+    userModel.firstName = firstNameEditingController.text;
+    userModel.secondName = secondNameEditingController.text;
+
+    await firebaseFirestore
+        .collection("users")
+        .doc(user.uid)
+        .set(userModel.toMap());
+    Fluttertoast.showToast(msg: "Account created successfully :) ");
+
+    Navigator.pushAndRemoveUntil(
+        (context),
+        MaterialPageRoute(builder: (context) => PostPage()),
+        (route) => false);
   }
 }
 
@@ -578,7 +619,7 @@ class _SignUpState extends State<SignUp> {
 //                     ),
 //                     hintText: 'Confirm Password',
 //                     hintStyle: TextStyle(
-//                       color: Color(0xFFE9D6C4),
+                      // color: Color(0xFFE9D6C4),
 //                     ),
 //                     prefixIcon: Icon(Icons.lock, color: Color(0xFFE9D6C4)),
 //                     fillColor: Color(0xFF1B191A),

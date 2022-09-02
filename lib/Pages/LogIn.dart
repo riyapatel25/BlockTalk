@@ -33,6 +33,7 @@ class _LogInState extends State<LogIn> {
     //--------------------define the fields----------------------------
     //email field
     final emailField = TextFormField(
+      style: TextStyle( color: Color(0xFFE9D6C4)),
       autofocus: false,
       controller: emailController,
       keyboardType: TextInputType.emailAddress,
@@ -72,6 +73,8 @@ class _LogInState extends State<LogIn> {
 
     //password field
     final passwordField = TextFormField(
+      style: TextStyle( color: Color(0xFFE9D6C4)),
+
       autofocus: false,
       controller: passwordController,
       obscureText: true,
@@ -205,16 +208,22 @@ class _LogInState extends State<LogIn> {
     );
   }
 
-
-  //------------- function for log in -------------
+  // ------------- function for log in -------------
   void signIn(String email, String password) async {
+    // print('called sign in function');
+    // print(email);
+    // print(password);
+
     if (_formKey.currentState!.validate()) {
       try {
         await _auth
+            
             //sign in user with Firebase
             .signInWithEmailAndPassword(email: email, password: password)
             .then((uid) => {
+                  // print('about to sign in'),
                   Fluttertoast.showToast(msg: "Login Successful"),
+                  //  print('signed in'),
                   Navigator.of(context).pushReplacement(
                       MaterialPageRoute(builder: (context) => PostPage())),
                 });
@@ -242,11 +251,41 @@ class _LogInState extends State<LogIn> {
           default:
             errorMessage = "An undefined Error happened.";
         }
+        print('error message');
         Fluttertoast.showToast(msg: errorMessage!);
-        print(error.code);
+        print('error code');
+        print(error.code); //keychain error 
       }
     }
   }
+}
+
+// void signIn(String email, String password) async {
+   
+
+//     if (_formKey.currentState!.validate()) {
+  
+//         await _auth
+            
+//             //sign in user with Firebase
+//             .signInWithEmailAndPassword(email: email, password: password)
+//             .then((uid) => {
+//                   // print('about to sign in'),
+//                   Fluttertoast.showToast(msg: "Login Successful"),
+//                   //  print('signed in'),
+//                   Navigator.of(context).pushReplacement(
+//                       MaterialPageRoute(builder: (context) => PostPage())),
+//                 }).catchError((e)
+//                 {
+//         Fluttertoast.showToast(msg: e!.message!);
+        
+      
+//     });
+//   }
+// }
+// }
+
+
 
 
 //old code
@@ -420,4 +459,3 @@ class _LogInState extends State<LogIn> {
 //         ))));
 //   }
 // }
-}
