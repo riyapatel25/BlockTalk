@@ -5,11 +5,17 @@ import 'Pages/WelcomePage.dart';
 import 'Pages/SignUp.dart';
 import 'Pages/MainPage.dart';
 import 'firebase_options.dart';
-
-
-
+// import 'package:cloud_firestore/cloud_firestore.dart';
 
 // const Taupe = Color(0xFF7D5C65);
+// Future<void> main() async {
+//   WidgetsFlutterBinding.ensureInitialized();
+//   await Firebase.initializeApp();
+
+//  await Firebase.initializeApp(
+//     options: DefaultFirebaseOptions.currentPlatform,
+//   );
+// }
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(
@@ -17,12 +23,6 @@ void main() async {
   );
   runApp(BlockTalk());
 }
-// void main() async {
-//   WidgetsFlutterBinding.ensureInitialized();
-//   await Firebase.initializeApp();
-//   runApp(BlockTalk());
-// }
-
 
 class BlockTalk extends StatelessWidget{
   const BlockTalk({super.key});
@@ -33,7 +33,7 @@ class BlockTalk extends StatelessWidget{
       title: 'BlockTalk',
       theme: ThemeData(colorScheme: colours),
       debugShowCheckedModeBanner: false,
-      home: MainPage(),
+      home: WelcomePage(),
     );
   }
 }
