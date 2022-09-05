@@ -2,22 +2,31 @@ import 'package:block_talk/NavBar.dart';
 import 'package:block_talk/Pages/PostPage.dart';
 import 'package:flutter/material.dart';
 import 'package:block_talk/Pages/LogIn.dart';
-
 // import 'package:firebase_core/firebase_core.dart';
-
 import 'Pages/Welcome.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'Pages/WelcomePage.dart';
 import 'Pages/SignUp.dart';
-
-
+import 'Pages/MainPage.dart';
+import 'firebase_options.dart';
+// import 'package:cloud_firestore/cloud_firestore.dart';
 
 // const Taupe = Color(0xFF7D5C65);
+// Future<void> main() async {
+//   WidgetsFlutterBinding.ensureInitialized();
+//   await Firebase.initializeApp();
 
-void main() {
-  // WidgetsFlutterBinding.ensureInitialized();
-  // await Firebase.initializeApp();
+//  await Firebase.initializeApp(
+//     options: DefaultFirebaseOptions.currentPlatform,
+//   );
+// }
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
   runApp(BlockTalk());
 }
-
 
 class BlockTalk extends StatelessWidget{
   const BlockTalk({super.key});
@@ -28,7 +37,7 @@ class BlockTalk extends StatelessWidget{
       title: 'BlockTalk',
       theme: ThemeData(colorScheme: colours),
       debugShowCheckedModeBanner: false,
-      home: NavBar(),
+      home: WelcomePage(),
     );
   }
 }
