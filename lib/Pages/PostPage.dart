@@ -1,26 +1,34 @@
 import 'package:flutter/material.dart';
 import 'package:block_talk/Pages/widgets/Post.dart';
+import 'package:google_fonts/google_fonts.dart';
+
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:block_talk/models/user_model.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'LogIn.dart';
 
 
+List<Post> posts =  <Post>[Post(title: 'My Post', rating: '4.9', cookTime: '30 min',thumbnailUrl: 'https://lh3.googleusercontent.com/ei5eF1LRFkkcekhjdR_8XgOqgdjpomf-rda_vvh7jIauCgLlEWORINSKMRR6I6iTcxxZL9riJwFqKMvK0ixS0xwnRHGMY4I5Zw=s360', postHeight: 400,),
+                          Post(title: 'My Post', rating: '4.9', cookTime: '30 min', thumbnailUrl: 'https://lh3.googleusercontent.com/ei5eF1LRFkkcekhjdR_8XgOqgdjpomf-rda_vvh7jIauCgLlEWORINSKMRR6I6iTcxxZL9riJwFqKMvK0ixS0xwnRHGMY4I5Zw=s360', postHeight: 180,),
+                          Post(title: 'My Post', rating: '4.9', cookTime: '30 min', thumbnailUrl: 'https://lh3.googleusercontent.com/ei5eF1LRFkkcekhjdR_8XgOqgdjpomf-rda_vvh7jIauCgLlEWORINSKMRR6I6iTcxxZL9riJwFqKMvK0ixS0xwnRHGMY4I5Zw=s360', postHeight: 240,),
+                          ];
+                          
 class PostPage extends StatefulWidget {
     const PostPage({Key? key}) : super(key: key);
     @override
   _PostPageState createState() => _PostPageState();
 }
 
-class _PostPageState extends State<PostPage> {
-   User? user = FirebaseAuth.instance.currentUser;
+class _PostPageState extends State<PostPage> with TickerProviderStateMixin {
+  User? user = FirebaseAuth.instance.currentUser;
   //curent user
   UserModel loggedInUser = UserModel();
-
+  late TabController _tabController;
 
   @override
   void initState() {
     super.initState();
+        _tabController = TabController(length: 2, vsync: this);
     FirebaseFirestore.instance
         .collection("users")
         .doc(user!.uid)
@@ -29,6 +37,7 @@ class _PostPageState extends State<PostPage> {
       this.loggedInUser = UserModel.fromMap(value.data());
       setState(() {});
     });
+
   }
 
   @override
@@ -36,116 +45,46 @@ class _PostPageState extends State<PostPage> {
     return Scaffold(
    
         appBar: AppBar(
-          backgroundColor: Color(0xFF7D5C65),
-          shadowColor: Color(0xFF808767),
-          title: Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              //button 1
-              TextButton(
-                style: ButtonStyle(
-                  backgroundColor: MaterialStateProperty.resolveWith<Color>(
-                    (Set<MaterialState> states) {
-                      if (states.contains(MaterialState.pressed))
-                        return Theme.of(context)
-                            .colorScheme
-                            .primary
-                            .withOpacity(0.5);
-                      return Color.fromARGB(
-                          255, 129, 111, 116); // Use the component's default.
-                    },
-                  ),
-                ),
-                onPressed: () {},
-                child: const Text(
-                  'My City',
-                  style: TextStyle(
-                    fontSize: 20,
-                    color: Color(0xFFE9D6C4),
-                  ),
-                ),
+          backgroundColor: Theme.of(context).colorScheme.tertiary,
+          shadowColor: Theme.of(context).colorScheme.tertiary,
+          title: TabBar(    
+          controller: _tabController,
+            indicatorColor: Theme.of(context).colorScheme.onPrimary,      
+            tabs:  <Widget>[
+              Tab(
+                icon: Text("My City", style: GoogleFonts.montserrat(fontSize: 20, color: Theme.of(context).colorScheme.onBackground))
               ),
-              //space
-              SizedBox(width: 10),
-              //button 2
-              TextButton(
-                style: ButtonStyle(
-                  backgroundColor: MaterialStateProperty.resolveWith<Color>(
-                    (Set<MaterialState> states) {
-                      if (states.contains(MaterialState.pressed))
-                        return Theme.of(context)
-                            .colorScheme
-                            .primary
-                            .withOpacity(0.5);
-                      return Color.fromARGB(
-                          255, 129, 111, 116); // Use the component's default.
-                    },
-                  ),
-                ),
-                onPressed: () {},
-                child: const Text(
-                  'Friends',
-                  style: TextStyle(
-                    fontSize: 20,
-                    color: Color(0xFFE9D6C4),
-                  ),
-                ),
+              Tab(
+                icon: Text("My Friends", style: GoogleFonts.montserrat(fontSize: 20, color: Theme.of(context).colorScheme.onBackground))
               ),
-              // Icon(Icons.restaurant_menu),
-
-              //    Text(
-              //     'My City',
-              //     style: TextStyle(
-              //     fontSize: 20,
-              //     color: Color(0xFFE9D6C4),
-              // ),
-              //    ),
-
-              SizedBox(width: 15),
-
-              //     Text(
-              //     'Friends',
-              //     style: TextStyle(
-              //     fontSize: 20,
-              //     color: Color(0xFFE9D6C4),
-              // ),
-              //    ),
-            ],
+            ]
           ),
+        
         ),
-        body: Center(
-          child: Column(
-            children: [
-              // Text('signed in as' + user!.email!),
-              Text("Signed in as:"),
-              Text("${loggedInUser.firstName} ${loggedInUser.secondName}"),
-              Text("${loggedInUser.email}"),
-
-               const Post(
-          title: 'My Post',
-          rating: '4.9',
-          cookTime: '30 min',
-          thumbnailUrl:
-              'https://lh3.googleusercontent.com/ei5eF1LRFkkcekhjdR_8XgOqgdjpomf-rda_vvh7jIauCgLlEWORINSKMRR6I6iTcxxZL9riJwFqKMvK0ixS0xwnRHGMY4I5Zw=s360',
-        ),
-        MaterialButton(
+        body: 
+        //button here from merge
+         MaterialButton(
           onPressed: () {
             logout(context);
           },
           color: Colors.deepPurple,
           child: Text('sign out'),
         )
-            ],
-            ),
-          ),
-
-        );
-  }
+        TabBarView(
+          controller: _tabController,
+          children: [Container(margin: const EdgeInsets.symmetric(vertical: 20.0),
+                                child: ListView( scrollDirection: Axis.vertical, children: posts),), 
+                    Container(margin: const EdgeInsets.symmetric(vertical: 20.0), 
+                                child: ListView( scrollDirection: Axis.vertical, children: posts),)
+                    ],
+        ),
+    );
   //  logout function
   Future<void> logout(BuildContext context) async {
     await FirebaseAuth.instance.signOut();
     Navigator.of(context).pushReplacement(
         MaterialPageRoute(builder: (context) => LogIn()));
   }
+  }
 
-}
+
