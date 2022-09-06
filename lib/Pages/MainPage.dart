@@ -1,6 +1,7 @@
 import 'package:block_talk/Pages/WelcomePage.dart';
 import 'package:flutter/material.dart';
 import 'LogIn.dart';
+import 'WelcomePage.dart';
 import 'PostPage.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -20,7 +21,7 @@ class MainPage extends StatelessWidget {
               return PostPage();
             }
             else{
-              return LogIn();
+              return LogIn(); //welcome page doesnt log in
             }
           },
         ),
